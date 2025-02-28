@@ -2,6 +2,13 @@ services:
   _defaults:
     public: true
 
+  # Register the controller as a service
+  DimSymfony\Controller\ConfigurationController:
+    arguments:
+      - '@prestashop.module.dimsymfony.form.configuration_text_form_data_handler'
+    tags:
+      - { name: 'controller.service_arguments' }
+
   # Demo configuration text form
   prestashop.module.dimsymfony.form.type.configuration_text:
     class: 'DimSymfony\Form\ConfigurationFormType'
@@ -25,5 +32,5 @@ services:
       - '@form.factory'
       - '@prestashop.core.hook.dispatcher'
       - '@prestashop.module.dimsymfony.form.configuration_text_form_data_provider'
-      - 'PrestaShop\Module\DimSymfony\Form\ConfigurationFormType'
+      - 'DimSymfony\Form\ConfigurationFormType'
       - 'Configuration'

@@ -1,8 +1,7 @@
-demo_configuration_form_simple:
-  path: /dimsymfony/configuration
+configuration_form_simple:
+  path: /modules/dimsymfony/configuration
   methods: [GET, POST]
   defaults:
     _controller: 'DimSymfony\Controller\ConfigurationController::index'
-    # Needed to work with tab system
-    _legacy_controller: AdminSymfony
-    _legacy_link: AdminSymfony
+    _legacy_controller: 'DimSymfony'
+    _legacy_link: 'DimSymfony'
