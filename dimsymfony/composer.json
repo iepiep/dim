@@ -1,0 +1,23 @@
+{
+  "name": "iepiep/dimsymfony",
+  "description": "DIM - Settings Form",
+  "license": "AFL-3.0",
+  "authors": [
+    {
+      "name": "Roberto Minini"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "DimSymfony\\": "src/"
+    }
+  },
+  "require": {
+    "php": ">=7.1.0"
+  },
+  "config": {
+    "preferred-install": "dist",
+    "prepend-autoloader": false
+  },
+  "type": "prestashop-module"
+}
