@@ -1,0 +1,8 @@
+demo_configuration_form_simple:
+  path: /dimsymfony/configuration
+  methods: [GET, POST]
+  defaults:
+    _controller: 'PrestaShop\Module\DimSymfony\Controller\ConfigurationController::index'
+    # Needed to work with tab system
+    _legacy_controller: AdminSymfony
+    _legacy_link: AdminSymfony
