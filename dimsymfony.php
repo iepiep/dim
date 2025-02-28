@@ -9,11 +9,11 @@
  * with this source code in the file LICENSE.
  */
 
+declare(strict_types=1);
+
 if (!defined('_PS_VERSION_')) {
     exit;
 }
-
-declare(strict_types=1);
 
 use PrestaShop\PrestaShop\Adapter\SymfonyContainer;
 use DimSymfony\Form\ConfigurationTextDataConfiguration;

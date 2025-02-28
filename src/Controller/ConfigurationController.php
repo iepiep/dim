@@ -9,13 +9,13 @@
  * with this source code in the file LICENSE.
  */
 
-if (!defined('_PS_VERSION_')) {
-    exit;
-}
-
 declare(strict_types=1);
 
 namespace DimSymfony\Controller;
+
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
 
 use PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController;
 use Symfony\Component\HttpFoundation\Request;

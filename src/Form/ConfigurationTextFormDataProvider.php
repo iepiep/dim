@@ -9,13 +9,13 @@
  * with this source code in the file LICENSE.
  */
 
-if (!defined('_PS_VERSION_')) {
-    exit;
-}
-
 declare(strict_types=1);
 
 namespace DimSymfony\Form;
+
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
 
 use PrestaShop\PrestaShop\Core\Configuration\DataConfigurationInterface;
 use PrestaShop\PrestaShop\Core\Form\FormDataProviderInterface;
