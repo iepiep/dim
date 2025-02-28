@@ -6,5 +6,5 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'PrestaShop\\Module\\DimSymfony\\' => array($baseDir . '/src'),
+    'DimSymfony\\' => array($baseDir . '/src'),
 );

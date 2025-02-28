@@ -4,18 +4,18 @@ services:
 
   # Demo configuration text form
   prestashop.module.dimsymfony.form.type.configuration_text:
-    class: 'PrestaShop\Module\DimSymfony\Form\ConfigurationFormType'
+    class: 'DimSymfony\Form\ConfigurationFormType'
     parent: 'form.type.translatable.aware'
     public: true
     tags:
       - { name: form.type }
 
   prestashop.module.dimsymfony.form.configuration_text_data_configuration:
-    class: PrestaShop\Module\DimSymfony\Form\ConfigurationTextDataConfiguration
+    class: 'DimSymfony\Form\ConfigurationTextDataConfiguration'
     arguments: ['@prestashop.adapter.legacy.configuration']
 
   prestashop.module.dimsymfony.form.configuration_text_form_data_provider:
-    class: 'PrestaShop\Module\DimSymfony\Form\ConfigurationTextFormDataProvider'
+    class: 'DimSymfony\Form\ConfigurationTextFormDataProvider'
     arguments:
       - '@prestashop.module.dimsymfony.form.configuration_text_data_configuration'
 

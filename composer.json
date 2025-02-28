@@ -1,6 +1,6 @@
 {
-  "name": "prestashop/dimsymfony",
-  "description": "PrestaShop - Settings Form Examples",
+  "name": "iepiep/dimsymfony",
+  "description": "DIM - Settings Form",
   "license": "AFL-3.0",
   "authors": [
     {
@@ -9,7 +9,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "PrestaShop\\Module\\DimSymfony\\": "src/"
+      "DimSymfony\\": "src/"
     }
   },
   "require": {
