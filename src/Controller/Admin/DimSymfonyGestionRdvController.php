@@ -1,14 +1,14 @@
 <?php
-
 declare(strict_types=1);
-
 namespace DimSymfony\Controller\Admin;
-
 use DimSymfony\Service\ItineraryService;
 use PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Db;
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
 
 class DimSymfonyGestionRdvController extends FrameworkBundleAdminController
 {
