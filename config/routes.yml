@@ -1,11 +1,3 @@
-configuration_form_simple:
-  path: /modules/dimsymfony/configuration
-  methods: [GET, POST]
-  defaults:
-    _controller: 'DimSymfony\Controller\ConfigurationController::index'
-    _legacy_controller: 'AdminModules'
-    _legacy_link: 'AdminModules'
-
 admin_dimsymphony_config_index:
   path: /modules/dimsymfony/config
   defaults:
