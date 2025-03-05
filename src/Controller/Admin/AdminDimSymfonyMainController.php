@@ -1,9 +1,9 @@
 <?php
-
 namespace DimSymfony\Controller\Admin;
-
 use PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController;
-
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
 class AdminDimSymfonyMainController extends FrameworkBundleAdminController
 {
     public function indexAction()
