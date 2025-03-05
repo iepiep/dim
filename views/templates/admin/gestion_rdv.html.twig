@@ -1,0 +1,58 @@
+{#
+/**
+ *  Copyright (c) 2025 iepiep <r.minini@solution61.fr>
+ *
+ *  This source file is subject to the MIT license that is bundled
+ *  with this source code in the file LICENSE.
+ *
+ *  If you did not receive a copy of the license and are unable to
+ *  obtain it through the world-wide-web, please send an email
+ *  to r.minini@solution61.fr so we can send you a copy immediately.
+ */
+#}
+
+{% extends '@PrestaShop/Admin/layout.html.twig' %}
+
+{% block content %}
+    <h2>{{ 'Appointment Management'|trans({}, 'Modules.Dimsymfony.Admin') }}</h2>
+
+    <form method="post" action="{{ path('admin_dimsymphony_gestionrdv_index') }}">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>{{ 'ID'|trans({}, 'Modules.Dimsymfony.Admin') }}</th>
+                <th>{{ 'Last Name'|trans({}, 'Modules.Dimsymfony.Admin') }}</th>
+                <th>{{ 'First Name'|trans({}, 'Modules.Dimsymfony.Admin') }}</th>
+                <th>{{ 'Address'|trans({}, 'Modules.Dimsymfony.Admin') }}</th>
+                <th>{{ 'City'|trans({}, 'Modules.Dimsymfony.Admin') }}</th>
+                <th>{{ 'Phone'|trans({}, 'Modules.Dimsymfony.Admin') }}</th>
+                <th>{{ 'Email'|trans({}, 'Modules.Dimsymfony.Admin') }}</th>
+                <th>{{ 'Select'|trans({}, 'Modules.Dimsymfony.Admin') }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% if rdvs %}
+                {% for row in rdvs %}
+                    <tr>
+                        <td>{{ row.id_dim_rdv|escape }}</td>
+                        <td>{{ row.lastname|escape }}</td>
+                        <td>{{ row.firstname|escape }}</td>
+                        <td>{{ row.address|escape }}</td>
+                        <td>{{ row.city|escape }}</td>
+                        <td>{{ row.phone|escape }}</td>
+                        <td>{{ row.email|escape }}</td>
+                        <td>
+                            <input type="checkbox" name="selected[]" value="{{ row.id_dim_rdv|escape }}" />
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="8">{{ 'No appointments found'|trans({}, 'Modules.Dimsymfony.Admin') }}</td>
+                </tr>
+            {% endif %}
+            </tbody>
+        </table>
+        <button type="submit" name="generate_itinerary" class="btn btn-primary">{{ 'Generate Itinerary'|trans({}, 'Modules.Dimsymfony.Admin') }}</button>
+    </form>
+{% endblock %}

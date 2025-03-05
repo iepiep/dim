@@ -34,3 +34,9 @@ services:
       - '@prestashop.module.dimsymfony.form.configuration_text_form_data_provider'
       - 'DimSymfony\Form\ConfigurationFormType'
       - 'Configuration'
+
+  Dimsymfony.service.itinerary_service:
+    class: DimSymfony\Service\ItineraryService
+
+parameters:
+  dimsymphony.google_api_key: '%env(DIMSYMFONY_GOOGLE_API_KEY)%'

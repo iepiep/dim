@@ -22,12 +22,11 @@ class DimSymfony extends Module {
 
     public function __construct() {
         $this->name = 'dimsymfony';
-        $this->tab = 'shipping_logistics';
         $this->author = 'Roberto Minini';
         $this->version = '1.0.0';
         $this->need_instance = 0;
-
         $this->bootstrap = true;
+
         parent::__construct();
 
         $this->displayName = $this->trans('Dim Symfony-based module', [], 'Modules.Dimsymfony.Admin');
@@ -36,8 +35,35 @@ class DimSymfony extends Module {
                 [],
                 'Modules.Dimsymfony.Admin'
         );
+        $this->ps_versions_compliancy = ['min' => '8.0.0', 'max' => '8.99.99'];
 
         $this->ps_versions_compliancy = ['min' => '8.0.0', 'max' => '8.99.99'];
+        $this->tabs = [
+            [
+                'name' => 'Appointment Management', // Main tab
+                'class_name' => 'AdminDimSymfonyMain',
+                'visible' => true,
+                'parent_class_name' => 'CONFIG', // Or another appropriate parent
+                'wording' => 'Appointment Management', // Fallback if translation not found
+                'wording_domain' => 'Modules.Dimsymfony', // Translation domain
+            ],
+            [
+                'name' => 'Configuration', // Subtab
+                'class_name' => 'AdminDimSymfonyConfig',
+                'visible' => true,
+                'parent_class_name' => 'AdminDimSymfonyMain', // Parent is the main tab
+                'wording' => 'Configuration', // Fallback if translation not found
+                'wording_domain' => 'Modules.Dimsymfony', // Translation domain
+            ],
+            [
+                'name' => 'Itinerary Icon', // Subtab
+                'class_name' => 'DimSymfonyGestionRdv', // Class name without namespace
+                'visible' => true,
+                'parent_class_name' => 'AdminDimSymfonyMain', // Parent is the main tab
+                'wording' => 'Itinerary Icon', // Fallback if translation not found
+                'wording_domain' => 'Modules.Dimsymfony', // Translation domain
+            ],
+        ];
     }
 
     public function getContent() {
@@ -46,7 +72,7 @@ class DimSymfony extends Module {
     }
 
     public function install(): bool {
-        if (!parent::install() || !$this->installSql() || !$this->registerHook('displayHome')
+        if (!parent::install() || !$this->registerHook('displayHome') || $this->installTab()
         ) {
             return false;
         }
@@ -63,42 +89,44 @@ class DimSymfony extends Module {
         return true;
     }
 
-    private function installSql(): bool {
-        $sql_file = dirname(__FILE__) . '/sql/installs.sql';
+    public function installTab() {
+        foreach ($this->tabs as $tab) {
+            $newTab = new Tab();
+            $newTab->class_name = $tab['class_name'];
+            $newTab->id_parent = Tab::getIdFromClassName($tab['parent_class_name']);
+            $newTab->module = $this->name;
+            $newTab->name = [];
 
-        if (!file_exists($sql_file)) {
-            return false;
-        }
+            foreach (Language::getLanguages(true) as $lang) {
+                $newTab->name[$lang['id_lang']] = $this->trans($tab['wording'], [], $tab['wording_domain']);
+            }
 
-        $sql_content = file_get_contents($sql_file);
-        $sql_content = str_replace('PREFIX_', _DB_PREFIX_, $sql_content);
-        $queries = preg_split("/;\s*[\r\n]+/", $sql_content);
+            $newTab->active = 1;
 
-        foreach ($queries as $query) {
-            if (!empty(trim($query))) {
-                try {
-                    if (!Db::getInstance()->execute($query)) {
-                        return false;
-                    }
-                } catch (Exception $e) {
-                    PrestaShopLogger::addLog('SQL Error: ' . $e->getMessage(), 3);
-                }
+            try {
+                $newTab->add();
+            } catch (Exception $e) {
+                PrestaShopLogger::addLog('Error creating tab ' . $tab['class_name'] . ': ' . $e->getMessage(), 3, null, null, 'DimSymfony');
+                return false;
             }
         }
 
         return true;
     }
 
-    private function uninstallSql(): bool {
-        $sql = 'DROP TABLE IF EXISTS `' . _DB_PREFIX_ . 'dim_rdv`';
+    public function uninstallTab() {
+        foreach ($this->tabs as $tab) {
+            $idTab = Tab::getIdFromClassName($tab['class_name']);
+            $tab = new Tab($idTab);
 
-        try {
-            return Db::getInstance()->execute($sql);
-        } catch (Exception $e) {
-            PrestaShopLogger::addLog('SQL Uninstall Error: ' . $e->getMessage(), 3);
-
-            return false;
+            try {
+                $tab->delete();
+            } catch (Exception $e) {
+                return false;
+            }
         }
+
+        return true;
     }
 
     public function hookDisplayHome($params) {

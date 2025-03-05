@@ -3,5 +3,12 @@ configuration_form_simple:
   methods: [GET, POST]
   defaults:
     _controller: 'DimSymfony\Controller\ConfigurationController::index'
-    _legacy_controller: 'DimSymfony'
-    _legacy_link: 'DimSymfony'
+    _legacy_controller: 'AdminModules'
+    _legacy_link: 'AdminModules'
+
+admin_dimsymphony_gestionrdv_index:
+  path: /modules/dimsymfony/gestionrdv
+  defaults:
+    _controller: 'DimSymfony\Controller\Admin\DimSymfonyGestionRdvController::indexAction'
+    _legacy_controller: 'AdminModules'
+    _legacy_link: 'AdminModules'
