@@ -22,6 +22,7 @@ class DimSymfony extends Module {
 
     public function __construct() {
         $this->name = 'dimsymfony';
+        $this->tab = 'shipping_logistics';
         $this->author = 'Roberto Minini';
         $this->version = '1.0.0';
         $this->need_instance = 0;
@@ -81,7 +82,7 @@ class DimSymfony extends Module {
     }
 
     public function uninstall(): bool {
-        if (!parent::uninstall() || Configuration::deleteByName(ConfigurationTextDataConfiguration::DIM_SYMFONY_TEXT_TYPE) || !$this->uninstallSql() || !$this->unregisterHook('displayHome')
+        if (!parent::uninstall() || Configuration::deleteByName(ConfigurationTextDataConfiguration::DIM_SYMFONY_TEXT_TYPE) || !$this->unregisterHook('displayHome')
         ) {
             return false;
         }
