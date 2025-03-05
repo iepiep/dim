@@ -6,6 +6,13 @@ configuration_form_simple:
     _legacy_controller: 'AdminModules'
     _legacy_link: 'AdminModules'
 
+admin_dimsymphony_config_index:
+  path: /modules/dimsymfony/config
+  defaults:
+    _controller: 'DimSymfony\Controller\Admin\AdminDimSymfonyConfigController::indexAction'
+    _legacy_controller: 'AdminModules'
+    _legacy_link: 'AdminModules'
+
 admin_dimsymphony_gestionrdv_index:
   path: /modules/dimsymfony/gestionrdv
   defaults:
