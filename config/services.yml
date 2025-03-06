@@ -11,8 +11,10 @@ services:
       - { name: 'controller.service_arguments' }
 
   DimSymfony\Controller\Admin\AdminDimSymfonyConfigController:
-    tags:
-      - { name: 'controller.service_arguments' }
+  arguments:
+    - '@prestashop.module.dimsymfony.form.configuration_text_form_data_handler'
+  tags: ['controller.service_arguments']
+
 
   # Demo configuration text form
   prestashop.module.dimsymfony.form.type.configuration_text:
