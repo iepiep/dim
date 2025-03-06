@@ -1,14 +1,4 @@
 <?php
-
-/**
- * @author Roberto Minini <r.minini@solution61.fr>
- * @copyright 2025 Roberto Minini
- * @license MIT
- *
- * This file is part of the dimrdv project.
- * This source file is subject to the MIT license that is bundled
- * with this source code in the file LICENSE.
- */
 declare(strict_types=1);
 
 namespace DimSymfony\Controller\Admin;
@@ -25,15 +15,15 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/modules/dimsymfony/config", name="admin_dimsymphony_config_index")
  */
-class AdminDimSymfonyConfigController extends FrameworkBundleAdminController {
-
+class AdminDimSymfonyConfigController extends FrameworkBundleAdminController
+{
     /**
      * @var \PrestaShop\PrestaShop\Core\Form\Handler
      */
     private $textFormDataHandler;
 
     public function __construct(
-            \PrestaShop\PrestaShop\Core\Form\Handler $textFormDataHandler
+        \PrestaShop\PrestaShop\Core\Form\Handler $textFormDataHandler
     ) {
         parent::__construct();
 
@@ -41,14 +31,14 @@ class AdminDimSymfonyConfigController extends FrameworkBundleAdminController {
     }
 
     /**
-     * @Route("/modules/dimsymfony/config", name="admin_dimsymphony_config_index")
+     * @Route("", methods={"GET", "POST"}, name="admin_dimsymphony_config_index")
      */
-    public function indexAction(Request $request): Response {
+    public function indexAction(Request $request): Response
+    {
         $textForm = $this->textFormDataHandler->getForm();
         $textForm->handleRequest($request);
 
         if ($textForm->isSubmitted() && $textForm->isValid()) {
-            /** You can return array of errors in form handler and they can be displayed to user with flashErrors */
             $errors = $this->textFormDataHandler->save($textForm->getData());
 
             if (empty($errors)) {
@@ -61,7 +51,7 @@ class AdminDimSymfonyConfigController extends FrameworkBundleAdminController {
         }
 
         return $this->render('@Modules/dimsymfony/views/templates/admin/form.html.twig', [
-                    'ConfigurationForm' => $textForm->createView()
+            'ConfigurationForm' => $textForm->createView()
         ]);
     }
 }

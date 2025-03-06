@@ -5,11 +5,15 @@ use DimSymfony\Service\ItineraryService;
 use PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 use Db;
 if (!defined('_PS_VERSION_')) {
     exit;
 }
 
+/**
+ * @Route("/modules/dimsymfony/gestionrdv", name="admin_dimsymphony_gestionrdv_index")
+ */
 class DimSymfonyGestionRdvController extends FrameworkBundleAdminController
 {
     private $itineraryService;
@@ -19,8 +23,12 @@ class DimSymfonyGestionRdvController extends FrameworkBundleAdminController
     {
         $this->itineraryService = $itineraryService;
         $this->googleApiKey = $googleApiKey;
+        parent::__construct();
     }
 
+    /**
+     * @Route("", methods={"GET", "POST"}, name="admin_dimsymphony_gestionrdv_index")
+     */
     public function indexAction(Request $request): Response
     {
         $rdvs = Db::getInstance()->executeS(
