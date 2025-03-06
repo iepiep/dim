@@ -73,7 +73,7 @@ class DimSymfony extends Module {
     }
 
     public function install(): bool {
-        if (!parent::install() || !$this->registerHook('displayHome') || $this->installTab()|| !$this->installSql()
+        if (!parent::install() || !$this->installSql() || !$this->registerHook('displayHome') || $this->installTab()
         ) {
             return false;
         }
@@ -82,7 +82,7 @@ class DimSymfony extends Module {
     }
 
     public function uninstall(): bool {
-        if (!parent::uninstall() || Configuration::deleteByName(ConfigurationTextDataConfiguration::DIM_SYMFONY_TEXT_TYPE) || !$this->unregisterHook('displayHome')|| !$this->installSql()
+        if (!parent::uninstall() || Configuration::deleteByName(ConfigurationTextDataConfiguration::DIM_SYMFONY_TEXT_TYPE) || !$this->unregisterHook('displayHome')|| !$this->uninstallSql()
         ) {
             return false;
         }
