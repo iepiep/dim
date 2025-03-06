@@ -9,7 +9,7 @@
  * with this source code in the file LICENSE.
  */
 declare(strict_types=1);
-namespace DimSymfony\Controller;
+namespace DimSymfony\Controller\Admin;
 if (!defined('_PS_VERSION_')) {
     exit;
 }
