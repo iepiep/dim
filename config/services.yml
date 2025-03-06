@@ -3,7 +3,7 @@ services:
     public: true
 
   # Register the controllers
-  DimSymfony\Controller\Admin\AdminDimSymfonyGestionRdvController:
+  DimSymfony\Controller\Admin\DimSymfonyGestionRdvController:
     arguments:
       - '@Dimsymfony.service.itinerary_service'
       - '%dimsymphony.google_api_key%'
