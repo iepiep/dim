@@ -17,6 +17,7 @@ if (!defined('_PS_VERSION_')) {
 use PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 class AdminDimSymfonyConfigController extends FrameworkBundleAdminController
 {
