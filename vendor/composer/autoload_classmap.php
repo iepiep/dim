@@ -7,7 +7,11 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
+    'DimSymfony\\Controller\\Admin\\AdminDimSymfonyConfigController' => $baseDir . '/src/Controller/Admin/AdminDimSymfonyConfigController.php',
+    'DimSymfony\\Controller\\Admin\\AdminDimSymfonyMainController' => $baseDir . '/src/Controller/Admin/AdminDimSymfonyMainController.php',
+    'DimSymfony\\Controller\\Admin\\DimSymfonyGestionRdvController' => $baseDir . '/src/Controller/Admin/DimSymfonyGestionRdvController.php',
     'DimSymfony\\Form\\ConfigurationFormType' => $baseDir . '/src/Form/ConfigurationFormType.php',
     'DimSymfony\\Form\\ConfigurationTextDataConfiguration' => $baseDir . '/src/Form/ConfigurationTextDataConfiguration.php',
     'DimSymfony\\Form\\ConfigurationTextFormDataProvider' => $baseDir . '/src/Form/ConfigurationTextFormDataProvider.php',
+    'DimSymfony\\Service\\ItineraryService' => $baseDir . '/src/Service/ItineraryService.php',
 );
