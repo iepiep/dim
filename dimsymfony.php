@@ -49,12 +49,13 @@ class DimSymfony extends Module {
                 'wording_domain' => 'Modules.Dimsymfony', // Translation domain
             ],
             [
-                'name' => 'Configuration', // Subtab
+                'name' => 'Configuration',
                 'class_name' => 'AdminDimSymfonyConfig',
                 'visible' => true,
-                'parent_class_name' => 'AdminDimSymfonyMain', // Parent is the main tab
-                'wording' => 'Configuration', // Fallback if translation not found
-                'wording_domain' => 'Modules.Dimsymfony', // Translation domain
+                'parent_class_name' => 'AdminDimSymfonyMain',
+                'wording' => 'Configuration',
+                'wording_domain' => 'Modules.Dimsymfony',
+                'route_name' => 'admin_dimsymphony_config_index',
             ],
             [
                 'name' => 'Itinerary Icon', // Subtab
@@ -82,7 +83,7 @@ class DimSymfony extends Module {
     }
 
     public function uninstall(): bool {
-        if (!parent::uninstall() || Configuration::deleteByName(ConfigurationTextDataConfiguration::DIM_SYMFONY_TEXT_TYPE) || !$this->unregisterHook('displayHome')|| !$this->uninstallSql()
+        if (!parent::uninstall() || Configuration::deleteByName(ConfigurationTextDataConfiguration::DIM_SYMFONY_TEXT_TYPE) || !$this->unregisterHook('displayHome') || !$this->uninstallSql()
         ) {
             return false;
         }
@@ -90,8 +91,7 @@ class DimSymfony extends Module {
         return true;
     }
 
-        private function installSql(): bool
-    {
+    private function installSql(): bool {
         $sql_file = dirname(__FILE__) . '/sql/installs.sql';
 
         if (!file_exists($sql_file)) {
@@ -117,8 +117,7 @@ class DimSymfony extends Module {
         return true;
     }
 
-    private function uninstallSql(): bool
-    {
+    private function uninstallSql(): bool {
         $sql = 'DROP TABLE IF EXISTS `' . _DB_PREFIX_ . 'dim_rdv`';
 
         try {
@@ -129,7 +128,7 @@ class DimSymfony extends Module {
             return false;
         }
     }
-    
+
     public function installTab() {
         foreach ($this->tabs as $tab) {
             $newTab = new Tab();
