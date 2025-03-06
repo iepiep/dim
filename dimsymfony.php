@@ -44,26 +44,27 @@ class DimSymfony extends Module {
                 'name' => 'Appointment Management', // Main tab
                 'class_name' => 'AdminDimSymfonyMain',
                 'visible' => true,
-                'parent_class_name' => 'CONFIG', // Or another appropriate parent
-                'wording' => 'Appointment Management', // Fallback if translation not found
-                'wording_domain' => 'Modules.Dimsymfony', // Translation domain
+                'parent_class_name' => 'CONFIG', // Onglet parent
+                'wording' => 'Appointment Management',
+                'wording_domain' => 'Modules.Dimsymfony',
             ],
             [
-                'name' => 'Configuration',
+                'name' => 'Configuration', // Sous-onglet
                 'class_name' => 'AdminDimSymfonyConfig',
                 'visible' => true,
-                'parent_class_name' => 'AdminDimSymfonyMain',
+                'parent_class_name' => 'AdminDimSymfonyMain', // Parent est l'onglet principal
                 'wording' => 'Configuration',
                 'wording_domain' => 'Modules.Dimsymfony',
-                'route_name' => 'admin_dimsymphony_config_index',
+                'route_name' => 'admin_dimsymphony_config_index', // 🔥 Ajout de la route Symfony ici !
             ],
             [
-                'name' => 'Itinerary Icon', // Subtab
-                'class_name' => 'DimSymfonyGestionRdv', // Class name without namespace
+                'name' => 'Itinerary Icon', // Sous-onglet
+                'class_name' => 'DimSymfonyGestionRdv',
                 'visible' => true,
-                'parent_class_name' => 'AdminDimSymfonyMain', // Parent is the main tab
-                'wording' => 'Itinerary Icon', // Fallback if translation not found
-                'wording_domain' => 'Modules.Dimsymfony', // Translation domain
+                'parent_class_name' => 'AdminDimSymfonyMain',
+                'wording' => 'Itinerary Icon',
+                'wording_domain' => 'Modules.Dimsymfony',
+                'route_name' => 'admin_dimsymphony_gestionrdv_index', // 🔥 Ajout de la route Symfony ici !
             ],
         ];
     }
