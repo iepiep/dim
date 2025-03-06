@@ -2,24 +2,20 @@ services:
   _defaults:
     public: true
 
-  # Register the controllers
+  # ItineraryService is used by the GestionRdvController (Symfony-based)
+  Dimsymfony.service.itinerary_service:
+    class: DimSymfony\Service\ItineraryService
+
+  # Register the GestionRdvController (Symfony-based)
   DimSymfony\Controller\Admin\DimSymfonyGestionRdvController:
     arguments:
       - '@Dimsymfony.service.itinerary_service'
       - '%dimsymphony.google_api_key%'
     tags:
       - { name: 'controller.service_arguments' }
-      - { name: 'admin.controller' } # Corrected tag
+      - { name: 'admin.controller' }
 
-  DimSymfony\Controller\Admin\AdminDimSymfonyConfigController:
-    # Now inject the correct service that exists:
-    arguments:
-      - '@prestashop.module.dimsymfony.form.configuration_text_form_data_handler'
-    tags:
-      - { name: 'controller.service_arguments' }
-      - { name: 'admin.controller' } # Corrected tag
-
-  # Demo configuration text form
+  # Form-related services (used by the configuration form)
   prestashop.module.dimsymfony.form.type.configuration_text:
     class: DimSymfony\Form\ConfigurationFormType
     parent: form.type.translatable.aware
@@ -45,9 +41,6 @@ services:
       - '@prestashop.module.dimsymfony.form.configuration_text_form_data_provider'
       - 'DimSymfony\Form\ConfigurationFormType'
       - 'Configuration'
-
-  Dimsymfony.service.itinerary_service:
-    class: DimSymfony\Service\ItineraryService
 
 parameters:
   dimsymphony.google_api_key: '%env(DIMSYMFONY_GOOGLE_API_KEY)%'

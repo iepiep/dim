@@ -1,24 +1,16 @@
 <?php
 namespace DimSymfony\Controller\Admin;
-use PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Response;
+use ModuleAdminController;
 if (!defined('_PS_VERSION_')) {
     exit;
 }
-
-/**
- * @Route("/modules/dimsymfony", name="admin_dimsymphony_main")
- */
-class AdminDimSymfonyMainController extends FrameworkBundleAdminController
+class AdminDimSymfonyMainController extends ModuleAdminController
 {
-     /**
-     * @Route("", methods={"GET"}, name="admin_dimsymphony_main")
-     */
-    public function indexAction():Response
+    public function __construct()
     {
-        // This controller doesn't need to do anything.  It just needs to exist
-        // so the tab system can find it.
-        return $this->render('@Modules/dimsymfony/views/templates/admin/main.html.twig');
+        parent::__construct();
+        $this->bootstrap = true;
+        $this->display = 'view';
     }
+
 }

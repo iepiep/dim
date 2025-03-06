@@ -1,12 +1,14 @@
 <?php
 declare(strict_types=1);
 namespace DimSymfony\Controller\Admin;
+
 use DimSymfony\Service\ItineraryService;
-use PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController;
+use PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController; // Correct for this controller
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Db;
+
 if (!defined('_PS_VERSION_')) {
     exit;
 }

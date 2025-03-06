@@ -10,6 +10,35 @@ use DimSymfony\Form\ConfigurationTextDataConfiguration;
 
 class Dimsymfony extends Module
 {
+    public $tabs = [
+        [
+            'name' => 'Appointment Management', // Main tab
+            'class_name' => 'AdminDimSymfonyMain',
+            'visible' => true,
+            'parent_class_name' => 'CONFIGURE', // Important: Use 'CONFIGURE' for modules main menu
+            'wording' => 'Appointment Management',
+            'wording_domain' => 'Modules.Dimsymfony',
+        ],
+        [
+            'name' => 'Configuration', // Subtab
+            'class_name' => 'AdminDimSymfonyConfig',
+            'visible' => true,
+            'parent_class_name' => 'AdminDimSymfonyMain', // Parent is the main tab
+            'wording' => 'Configuration',
+            'wording_domain' => 'Modules.Dimsymfony',
+            //'route_name' => 'admin_dimsymphony_config_index', // Removed: Route handled differently
+        ],
+        [
+            'name' => 'Itinerary Icon', // Subtab
+            'class_name' => 'DimSymfonyGestionRdv', //  Keep this name!
+            'visible' => true,
+            'parent_class_name' => 'AdminDimSymfonyMain',
+            'wording' => 'Itinerary Icon',
+            'wording_domain' => 'Modules.Dimsymfony',
+            'route_name' => 'admin_dimsymphony_gestionrdv_index', // Symfony route name
+        ],
+    ];
+
     public function __construct()
     {
         $this->name = 'dimsymfony';
@@ -28,42 +57,12 @@ class Dimsymfony extends Module
             'Modules.Dimsymfony.Admin'
         );
         $this->ps_versions_compliancy = ['min' => '8.0.0', 'max' => '8.99.99'];
-
-        $this->tabs = [
-            [
-                'name' => 'Appointment Management', // Main tab
-                'class_name' => 'AdminDimSymfonyMain',
-                'visible' => true,
-                'parent_class_name' => 'CONFIGURE', // IMPORTANT: Use 'CONFIGURE' for modules main menu
-                'wording' => 'Appointment Management',
-                'wording_domain' => 'Modules.Dimsymfony',
-            ],
-            [
-                'name' => 'Configuration', // Subtab
-                'class_name' => 'AdminDimSymfonyConfig',
-                'visible' => true,
-                'parent_class_name' => 'AdminDimSymfonyMain', // Parent is the main tab
-                'wording' => 'Configuration',
-                'wording_domain' => 'Modules.Dimsymfony',
-                'route_name' => 'admin_dimsymphony_config_index', // Symfony route name
-            ],
-            [
-                'name' => 'Itinerary Icon', // Subtab
-                'class_name' => 'DimSymfonyGestionRdv',
-                'visible' => true,
-                'parent_class_name' => 'AdminDimSymfonyMain',
-                'wording' => 'Itinerary Icon',
-                'wording_domain' => 'Modules.Dimsymfony',
-                'route_name' => 'admin_dimsymphony_gestionrdv_index', // Symfony route name
-            ],
-        ];
     }
+
 
     public function getContent()
     {
-        // Redirect to the Symfony route for module configuration.  This handles the "Configure" link in the Module Manager.
-        $url = $this->context->link->getAdminLink('AdminModules', true, [], ['configure' => $this->name]);
-        Tools::redirectAdmin($url);
+         return $this->context->link->getAdminLink('AdminDimSymfonyConfig');
     }
 
 
@@ -146,6 +145,8 @@ class Dimsymfony extends Module
 
         return true;
     }
+
+
 
     public function hookDisplayHome($params)
     {

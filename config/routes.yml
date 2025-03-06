@@ -1,8 +1,5 @@
-admin_dimsymphony_config_index:
-  path: /modules/dimsymfony/config
-  controller: 'DimSymfony\Controller\Admin\AdminDimSymfonyConfigController::indexAction'
-  methods: [GET, POST]
-
+# This route is for the Symfony-based GestionRdvController.
+# The main configuration page uses ModuleAdminController and doesn't need a route here.
 admin_dimsymphony_gestionrdv_index:
   path: /modules/dimsymfony/gestionrdv
   controller: 'DimSymfony\Controller\Admin\DimSymfonyGestionRdvController::indexAction'
