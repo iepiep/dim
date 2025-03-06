@@ -33,7 +33,7 @@ class AdminDimSymfonyConfigController extends FrameworkBundleAdminController
         $this->textFormDataHandler = $textFormDataHandler;
     }
 
-    public function index(Request $request): Response
+    public function indexAction(Request $request): Response
     {
         $textForm = $this->textFormDataHandler->getForm();
         $textForm->handleRequest($request);
