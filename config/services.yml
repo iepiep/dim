@@ -9,12 +9,14 @@ services:
       - '%dimsymphony.google_api_key%'
     tags:
       - { name: 'controller.service_arguments' }
+      - { name: 'admin_module' } # Add this tag
+      
 
   DimSymfony\Controller\Admin\AdminDimSymfonyConfigController:
     # Now inject the correct service that exists:
     arguments:
       - '@prestashop.module.dimsymfony.form.configuration_text_form_data_handler'
-    tags: ['controller.service_arguments']
+    tags: ['controller.service_arguments', 'admin_module']
 
   # Demo configuration text form
   prestashop.module.dimsymfony.form.type.configuration_text:

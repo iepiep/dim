@@ -1,13 +1,7 @@
 admin_dimsymphony_config_index:
   path: /modules/dimsymfony/config
   controller: 'DimSymfony\Controller\Admin\AdminDimSymfonyConfigController::indexAction'
-  defaults:
-    _legacy_controller: 'AdminModules'
-    _legacy_link: 'AdminModules'
 
 admin_dimsymphony_gestionrdv_index:
   path: /modules/dimsymfony/gestionrdv
   controller: 'DimSymfony\Controller\Admin\DimSymfonyGestionRdvController::indexAction'
-  defaults:
-    _legacy_controller: 'AdminModules'
-    _legacy_link: 'AdminModules'

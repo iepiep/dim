@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author Roberto Minini <r.minini@solution61.fr>
  * @copyright 2025 Roberto Minini
@@ -9,7 +10,9 @@
  * with this source code in the file LICENSE.
  */
 declare(strict_types=1);
+
 namespace DimSymfony\Controller\Admin;
+
 if (!defined('_PS_VERSION_')) {
     exit;
 }
@@ -19,23 +22,28 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class AdminDimSymfonyConfigController extends FrameworkBundleAdminController
-{
+/**
+ * @Route("/modules/dimsymfony/config", name="admin_dimsymphony_config_index")
+ */
+class AdminDimSymfonyConfigController extends FrameworkBundleAdminController {
+
     /**
      * @var \PrestaShop\PrestaShop\Core\Form\Handler
      */
     private $textFormDataHandler;
 
     public function __construct(
-        \PrestaShop\PrestaShop\Core\Form\Handler $textFormDataHandler
+            \PrestaShop\PrestaShop\Core\Form\Handler $textFormDataHandler
     ) {
         parent::__construct();
 
         $this->textFormDataHandler = $textFormDataHandler;
     }
 
-    public function indexAction(Request $request): Response
-    {
+    /**
+     * @Route("/modules/dimsymfony/config", name="admin_dimsymphony_config_index")
+     */
+    public function indexAction(Request $request): Response {
         $textForm = $this->textFormDataHandler->getForm();
         $textForm->handleRequest($request);
 
@@ -53,7 +61,7 @@ class AdminDimSymfonyConfigController extends FrameworkBundleAdminController
         }
 
         return $this->render('@Modules/dimsymfony/views/templates/admin/form.html.twig', [
-            'ConfigurationForm' => $textForm->createView()
+                    'ConfigurationForm' => $textForm->createView()
         ]);
     }
 }

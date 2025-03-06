@@ -70,8 +70,13 @@ class DimSymfony extends Module {
     }
 
     public function getContent() {
-        $route = $this->get('router')->generate('configuration_form_simple');
-        Tools::redirectAdmin($route);  // Redirect to the Symfony route
+        /**
+         * If you want to use the configuration in Module Manager
+         * You must define a route in order to work
+         */
+        return Tools::redirectAdmin(
+                        $this->context->link->getAdminLink('AdminModules', true, [], ['configure' => $this->name])
+                );
     }
 
     public function install(): bool {
