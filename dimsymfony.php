@@ -73,7 +73,7 @@ class DimSymfony extends Module {
     }
 
     public function install(): bool {
-        if (!parent::install() || !$this->registerHook('displayHome') || $this->installTab()
+        if (!parent::install() || !$this->registerHook('displayHome') || $this->installTab()|| !$this->installSql()
         ) {
             return false;
         }
@@ -82,7 +82,7 @@ class DimSymfony extends Module {
     }
 
     public function uninstall(): bool {
-        if (!parent::uninstall() || Configuration::deleteByName(ConfigurationTextDataConfiguration::DIM_SYMFONY_TEXT_TYPE) || !$this->unregisterHook('displayHome')
+        if (!parent::uninstall() || Configuration::deleteByName(ConfigurationTextDataConfiguration::DIM_SYMFONY_TEXT_TYPE) || !$this->unregisterHook('displayHome')|| !$this->installSql()
         ) {
             return false;
         }
@@ -90,6 +90,46 @@ class DimSymfony extends Module {
         return true;
     }
 
+        private function installSql(): bool
+    {
+        $sql_file = dirname(__FILE__) . '/sql/installs.sql';
+
+        if (!file_exists($sql_file)) {
+            return false;
+        }
+
+        $sql_content = file_get_contents($sql_file);
+        $sql_content = str_replace('PREFIX_', _DB_PREFIX_, $sql_content);
+        $queries = preg_split("/;\s*[\r\n]+/", $sql_content);
+
+        foreach ($queries as $query) {
+            if (!empty(trim($query))) {
+                try {
+                    if (!Db::getInstance()->execute($query)) {
+                        return false;
+                    }
+                } catch (Exception $e) {
+                    PrestaShopLogger::addLog('SQL Error: ' . $e->getMessage(), 3);
+                }
+            }
+        }
+
+        return true;
+    }
+
+    private function uninstallSql(): bool
+    {
+        $sql = 'DROP TABLE IF EXISTS `' . _DB_PREFIX_ . 'dim_rdv`';
+
+        try {
+            return Db::getInstance()->execute($sql);
+        } catch (Exception $e) {
+            PrestaShopLogger::addLog('SQL Uninstall Error: ' . $e->getMessage(), 3);
+
+            return false;
+        }
+    }
+    
     public function installTab() {
         foreach ($this->tabs as $tab) {
             $newTab = new Tab();
