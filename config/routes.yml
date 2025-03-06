@@ -11,8 +11,3 @@ admin_dimsymphony_gestionrdv_index:
     _controller: 'DimSymfony\Controller\Admin\DimSymfonyGestionRdvController::indexAction'
     _legacy_controller: 'AdminModules'
     _legacy_link: 'AdminModules'
-
-configuration_form_simple:
-  path: /configuration/simple
-  defaults:
-    _controller: DimSymfony\Controller\Admin\AdminDimSymfonyConfigController:configurationFormSimpleAction

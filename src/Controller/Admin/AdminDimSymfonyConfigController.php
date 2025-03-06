@@ -45,7 +45,7 @@ class AdminDimSymfonyConfigController extends FrameworkBundleAdminController
             if (empty($errors)) {
                 $this->addFlash('success', $this->trans('Successful update.', 'Admin.Notifications.Success'));
 
-                return $this->redirectToRoute('configuration_form_simple');
+                return $this->redirectToRoute('admin_dimsymphony_config_index');
             }
 
             $this->flashErrors($errors);
